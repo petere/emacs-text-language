@@ -39,7 +39,8 @@
 
 ;;; Code:
 
-(make-local-variable 'text-language-current)
+(defvar text-language-current nil
+  "Used to track the current language.")
 
 (defvar text-language-set-functions nil
   "List of functions to be called when the text language has been
@@ -77,7 +78,8 @@ Run the (abnormal) hook text-language-set-functions with it."
 
 (define-minor-mode text-language-mode
   "Toggle minor mode that tracks the text language."
-  :lighter (:eval (format " TL:%s" text-language-current)))
+  :lighter (:eval (format " TL:%s" text-language-current))
+  (make-local-variable 'text-language-current))
 
 (define-minor-mode text-language-guess-mode
   "Turn on or off hooks that automatically guess the text language."
