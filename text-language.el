@@ -1,12 +1,43 @@
 ;;; text-language.el --- tracking, setting, guessing language of text
 
+;; Copyright (C) 2012 Peter Eisentraut
+
 ;; Author: Peter Eisentraut <peter@eisentraut.org>
+;; URL: https://github.com/petere/emacs-text-language
+;; Version: unreleased
 ;; Keywords: i18n wp
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2 of the License, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 ;;
-;; needs https://bitbucket.org/spirit/guess_language
+;; This package tracks the human language of text.  The main use case
+;; for this is setting the spell checking dictionary, but there are
+;; other possibilities, such as adjusting the syntax table according
+;; to the language.
+;;
+;; Additionally, the language of the text can also be guessed, using
+;; external tools.  Currently, the only tool that is supported is
+;; <https://bitbucket.org/spirit/guess_language>.
+;;
+;; Call text-language-set-language to set the language text.  The
+;; hooks text-language-set-functions and
+;; text-language-guessed-functions are for hooking in actions that
+;; make use of the language information.  A hook that adjusts the
+;; ispell dictonary is installed by default.
 
+;;; Code:
 
 (make-local-variable 'text-language-current)
 
@@ -61,3 +92,5 @@ Run the (abnormal) hook text-language-set-functions with it."
   (add-hook 'text-language-set-functions 'ispell-change-dictionary))
 
 (provide 'text-language)
+
+;;; text-language.el ends here
