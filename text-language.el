@@ -84,8 +84,13 @@ Run the (abnormal) hook text-language-set-functions with it."
 (define-minor-mode text-language-guess-mode
   "Turn on or off hooks that automatically guess the text language."
   :lighter " GL"
-  (add-hook 'find-file-hook 'text-language-guess)
-  (add-hook 'after-save-hook 'text-language-guess))
+  (if text-language-guess-mode
+      (progn
+       (add-hook 'find-file-hook 'text-language-guess)
+       (add-hook 'after-save-hook 'text-language-guess))
+      (progn
+       (remove-hook 'after-save-hook 'text-language-guess)
+       (remove-hook 'find-file-hook 'text-language-guess))))
 
 (add-hook 'text-mode-hook 'text-language-mode)
 (add-hook 'text-mode-hook 'text-language-guess-mode)
