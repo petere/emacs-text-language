@@ -35,7 +35,7 @@
 ;; hooks text-language-set-functions and
 ;; text-language-guessed-functions are for hooking in actions that
 ;; make use of the language information.  A hook that adjusts the
-;; ispell dictonary is installed by default.
+;; Ispell dictonary is installed by default.
 
 ;;; Code:
 
