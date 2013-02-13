@@ -87,7 +87,8 @@ Run the (abnormal) hook text-language-set-functions with it."
   (if text-language-guess-mode
       (progn
        (add-hook 'find-file-hook 'text-language-guess)
-       (add-hook 'after-save-hook 'text-language-guess))
+       (add-hook 'after-save-hook 'text-language-guess)
+       (text-language-guess))
       (progn
        (remove-hook 'after-save-hook 'text-language-guess)
        (remove-hook 'find-file-hook 'text-language-guess))))
