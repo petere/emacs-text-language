@@ -1,3 +1,6 @@
 language: c
-install: sudo apt-get install -qq emacs
+before_install:
+  - sudo add-apt-repository -y ppa:cassou/emacs
+  - sudo apt-get -qq update
+install: sudo apt-get install -qq emacs24
 script: make all check dist clean
