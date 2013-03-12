@@ -1,0 +1,3 @@
+language: c
+install: sudo apt-get install -qq emacs
+script: make all check dist clean
